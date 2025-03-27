@@ -132,9 +132,9 @@ How many days on average are customers reallocated to a different node?
 
 ```sql
 with days_per_node AS (SELECT customer_id, 
-					             (end_date-start_date) AS node_days
-					         FROM customer_nodes
-					  WHERE end_date != '9999-12-31')
+                       (end_date-start_date) AS node_days
+                  FROM customer_nodes
+                  WHERE end_date != '9999-12-31')
 
 SELECT ROUND(AVG(node_days)) AS days_per_node
     FROM days_per_node
@@ -151,14 +151,14 @@ What is the median, 80th and 95th percentile for this same reallocation days met
 ```SQL
 with days_per_node AS (SELECT customer_id,
                               region_id, 
-					          (end_date-start_date) AS node_days
-					   FROM customer_nodes
-					  WHERE end_date != '9999-12-31')
+                              (end_date-start_date) AS node_days
+                     FROM customer_nodes
+                     WHERE end_date != '9999-12-31')
 
 SELECT r.region_name,
        PERCENTILE_CONT(0.5) within group (ORDER BY n.node_days) as median,
         PERCENTILE_CONT(0.8) within group (ORDER BY n.node_days) as "80_percentile",
-	     PERCENTILE_CONT(0.95) within group (ORDER BY n.node_days) as "95_percentile"
+          PERCENTILE_CONT(0.95) within group (ORDER BY n.node_days) as "95_percentile"
 FROM days_per_node n
 JOIN regions r ON n.region_id = r.region_id
 GROUP BY r.region_name 
@@ -177,8 +177,9 @@ GROUP BY r.region_name
 
 What is the unique count and total amount for each transaction type?
 
-```SQL alter table customer_transactions
-        add id serial;
+```SQL
+alter table customer_transactions
+add id serial;
 ```
 
 ```SQL
