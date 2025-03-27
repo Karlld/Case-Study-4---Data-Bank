@@ -144,7 +144,7 @@ SELECT ROUND(AVG(node_days)) AS days_per_node
 
 | days_per_node |
 |---------------|
-    |   15 |
+|      15       |
 
 What is the median, 80th and 95th percentile for this same reallocation days metric for each region?
 
